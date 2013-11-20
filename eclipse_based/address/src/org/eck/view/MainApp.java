@@ -3,15 +3,38 @@ package org.eck.view;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import org.eck.controller.PersonOverviewController;
+import org.eck.model.Person;
+
 public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	private ObservableList<Person> personData = FXCollections.observableArrayList();
+
+	public MainApp() {
+		// Add some sample data
+		personData.add(new Person("Hans", "Muster"));
+		personData.add(new Person("Ruth", "Mueller"));
+		personData.add(new Person("Heinz", "Kurz"));
+		personData.add(new Person("Cornelia", "Meier"));
+		personData.add(new Person("Werner", "Meyer"));
+		personData.add(new Person("Lydia", "Kunz"));
+		personData.add(new Person("Anna", "Best"));
+		personData.add(new Person("Stefan", "Meier"));
+		personData.add(new Person("Martin", "Mueller"));
+	}
+
+	public ObservableList<Person> getPersonData() {
+		return personData;
+	}
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -19,41 +42,32 @@ public class MainApp extends Application {
 		this.primaryStage.setTitle("AddressApp");
 
 		try {
-			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getClassLoader().getResource("org/eck/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
-			// Exception gets thrown if the fxml file could not be loaded
 			e.printStackTrace();
 		}
 
 		showPersonOverview();
 	}
 
-	/**
-	 * Returns the main stage.
-	 * 
-	 * @return
-	 */
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}
 
-	/**
-	 * Shows the person overview scene.
-	 */
 	public void showPersonOverview() {
 		try {
-			// Load the fxml file and set into the center of the main layout
 			FXMLLoader loader = new FXMLLoader(MainApp.class.getClassLoader().getResource("org/eck/view/PersonOverview.fxml"));
 			AnchorPane overviewPage = (AnchorPane) loader.load();
 			rootLayout.setCenter(overviewPage);
 
+			PersonOverviewController controller = loader.getController();
+			controller.setMainApp(this);
+
 		} catch (IOException e) {
-			// Exception gets thrown if the fxml file could not be loaded
 			e.printStackTrace();
 		}
 	}

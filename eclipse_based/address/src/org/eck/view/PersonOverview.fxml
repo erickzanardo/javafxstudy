@@ -5,17 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane prefHeight="300.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.eck.controller.PersonOverviewController">
   <!-- TODO Add Nodes -->
   <children>
     <SplitPane dividerPositions="0.4331103678929766" focusTraversable="true" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
           <children>
-            <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <TableView fx:id="personTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
               <columns>
-                <TableColumn prefWidth="115.0" text="First Name" />
-                <TableColumn minWidth="50.0" prefWidth="115.0" text="Last Name" />
+                <TableColumn prefWidth="115.0" text="First Name" fx:id="firstNameColumn" />
+                <TableColumn minWidth="50.0" prefWidth="115.0" text="Last Name" fx:id="lastNameColumn" />
               </columns>
             </TableView>
           </children>
