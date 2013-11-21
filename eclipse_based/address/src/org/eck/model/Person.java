@@ -1,6 +1,7 @@
 package org.eck.model;
 
 import java.util.Calendar;
+import java.util.Random;
 
 public class Person {
 	private String firstName;
@@ -10,7 +11,8 @@ public class Person {
 	private String city;
 	private Calendar birthday;
 
-	public Person() {}
+	public Person() {
+	}
 
 	public Person(String firstName, String lastName) {
 		this.firstName = firstName;
@@ -19,7 +21,9 @@ public class Person {
 		this.street = "some street";
 		this.postalCode = 1234;
 		this.city = "some city";
-		this.birthday = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, new Random().nextInt(11));
+		this.birthday = calendar;
 	}
 
 	public String getFirstName() {
