@@ -9,8 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import org.eck.controller.PersonEditDialogController;
 import org.eck.controller.PersonOverviewController;
 import org.eck.model.Person;
 
@@ -69,6 +71,31 @@ public class MainApp extends Application {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public boolean showPersonEditDialog(Person person) {
+		try {
+			FXMLLoader loader = new FXMLLoader(MainApp.class.getClassLoader().getResource("org/eck/view/PersonEditDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Edit Person");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			PersonEditDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setPerson(person);
+
+			dialogStage.showAndWait();
+
+			return controller.isOkClicked();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 
